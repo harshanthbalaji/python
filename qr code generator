@@ -1,0 +1,27 @@
+# Step 1: Install the required library
+!pip install qrcode[pil]
+
+# Step 2: Import required modules
+import qrcode
+from PIL import Image
+from IPython.display import Image as ColabImage
+
+# Step 3: Set the URL to Amazon
+data = "https://www.amazon.in"
+
+# Step 4: Create the QR code
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_H,
+    box_size=10,
+    border=4,
+)
+qr.add_data(data)
+qr.make(fit=True)
+
+# Step 5: Generate and save the QR image
+img = qr.make_image(fill_color="black", back_color="white")
+img.save("amazon_qr.png")
+
+# Step 6: Show the QR code inline in Google Colab
+ColabImage("amazon_qr.png")
